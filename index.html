@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Pricelist Lumiere</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Nunito:wght@400;600;700&display=swap">
+<style>
+:root{color-scheme:light;--tx:#5d4d68;--mut:#a090ab;--glass:rgba(255,255,255,.62);--bb:#e3d3f4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font-family:'Nunito',system-ui,sans-serif;line-height:1.55;min-height:100vh;
+background:radial-gradient(circle at 10% 6%,#ffe2ec 0,transparent 36%),radial-gradient(circle at 92% 14%,#e7ddfa 0,transparent 38%),radial-gradient(circle at 78% 92%,#d9f0e5 0,transparent 40%),radial-gradient(circle at 8% 88%,#dcebfa 0,transparent 36%),#fffafc;background-attachment:fixed}
+.wrap{max-width:1020px;margin:0 auto;padding:46px 18px 56px}
+header{text-align:center;margin-bottom:40px}
+h1{margin:0;color:#7a5a96;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(26px,6vw,36px);letter-spacing:.02em;line-height:1.2}
+.orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px auto 12px;color:#cbb3e6;font-size:13px;max-width:240px}
+.orn i{flex:1;height:1px;background:linear-gradient(90deg,transparent,#d9c6ee,transparent)}
+.sub{margin:0 auto;max-width:460px;color:var(--mut);font-size:14.5px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.btn{font:inherit;font-weight:700;font-size:13.5px;cursor:pointer;border:0;border-radius:99px;padding:8px 18px;background:#d8c6f1;color:#533b78;text-decoration:none;display:inline-block;transition:background .15s}
+.btn:hover{background:#cdb6ee}
+.btn.g{background:var(--glass);color:#6a5083;box-shadow:inset 0 0 0 1.2px var(--bb)}
+.btn.g:hover{background:#fff}
+button:focus-visible,a:focus-visible,.trk:focus-visible{outline:3px solid #b99be0;outline-offset:2px}
+
+.board{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
+.note{--n:#ffe9e1;--a:#ffbfa9;--i:#7a4a3d;position:relative;display:flex;flex-direction:column;color:var(--i);
+background:linear-gradient(165deg,var(--n),color-mix(in srgb,var(--n) 50%,#fff));
+border:1.5px solid rgba(255,255,255,.95);border-radius:30px;padding:26px 24px 18px;
+box-shadow:0 20px 38px -26px color-mix(in srgb,var(--i) 65%,transparent)}
+.note::after{content:"\2726";position:absolute;top:20px;right:22px;color:var(--a);font-size:17px}
+.note[data-c="lilac"]{--n:#f0e6fa;--a:#d3b9f0;--i:#5b4780}
+.note[data-c="mint"]{--n:#e2f6ea;--a:#b0e2c8;--i:#3f6b57}
+.note[data-c="sky"]{--n:#e2effb;--a:#b3d5f3;--i:#3f5f86}
+.note[data-c="rose"]{--n:#fde6ee;--a:#f6bcd1;--i:#86465f}
+.note[data-c="butter"]{--n:#fff5d3;--a:#f6dd8c;--i:#7a6120}
+.note h2{margin:0 0 10px;padding-right:26px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:700;font-size:29px;line-height:1.15}
+.ln{display:flex;align-items:baseline;gap:8px;padding:6px 0}
+.nm{font-weight:600;font-size:14.5px;overflow-wrap:anywhere}
+.dots{flex:1;border-bottom:1.5px dotted color-mix(in srgb,var(--i) 30%,transparent);transform:translateY(-4px);min-width:10px}
+.pr{background:color-mix(in srgb,var(--a) 75%,#fff);font-weight:700;font-size:13px;padding:2px 11px;border-radius:99px;white-space:nowrap}
+.ln.tx{font-size:13.5px;opacity:.8;padding:3px 0;display:block;overflow-wrap:anywhere;font-style:italic}
+
+.sec{margin-top:34px;text-align:center;background:var(--glass);border:1.5px solid rgba(255,255,255,.95);border-radius:30px;padding:30px 22px;box-shadow:0 20px 38px -28px rgba(120,80,160,.5)}
+.sec h2{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:700;font-size:28px;color:#7a5a96;margin:0 0 4px}
+.sec>p{margin:0 auto;max-width:42ch;font-size:14.5px;color:var(--mut)}
+.fmt{margin:18px auto 20px;max-width:460px;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;font-family:'Nunito',system-ui,sans-serif;font-size:14.5px;line-height:1.75;color:#6b4a86;background:linear-gradient(165deg,#fde6ee,#f0e6fa 60%,#e4effb);border:1.5px solid rgba(255,255,255,.95);border-radius:26px;padding:24px 22px}
+
+.wa{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:680px;margin:20px auto 0}
+.wa a{display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;color:#5b4780;background:#fff;border-radius:20px;padding:12px 16px;font-weight:700;box-shadow:inset 0 0 0 1.4px var(--bb);transition:background .15s}
+.wa a:hover{background:#f6edfd}
+.wa small{font-weight:600;color:var(--mut);font-size:12.5px}
+.note2{max-width:46ch;margin:18px auto 0;font-size:14px;color:var(--tx)}
+.cut{max-width:300px;margin:22px auto;border:0;border-top:1.5px dashed #d9c6ee}
+.xs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.bye{margin-top:18px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:20px;color:#7a5a96}
+
+.sl{margin:20px -22px 0}
+.trk{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 22px 18px;scrollbar-width:none}
+.trk::-webkit-scrollbar{display:none}
+.tc{--n:#ffe9e1;--a:#ffbfa9;--i:#7a4a3d;flex:0 0 min(82%,310px);scroll-snap-align:center;text-align:left;display:flex;flex-direction:column;position:relative;color:var(--i);
+background:linear-gradient(165deg,var(--n),color-mix(in srgb,var(--n) 50%,#fff));border:1.5px solid rgba(255,255,255,.95);border-radius:26px;padding:20px 20px 18px;box-shadow:0 16px 30px -24px color-mix(in srgb,var(--i) 65%,transparent)}
+.tc::after{content:"\2726";position:absolute;top:16px;right:18px;color:var(--a);font-size:15px}
+.tc .st{color:#e6b53c;letter-spacing:2px;font-size:13px}
+.sec .tc p{margin:8px 0 14px;max-width:none;font-size:14.5px;line-height:1.6;color:inherit;flex:1;overflow-wrap:anywhere}
+.tc .by{align-self:flex-start;background:color-mix(in srgb,var(--a) 70%,#fff);font-weight:700;font-size:12.5px;padding:2px 12px;border-radius:99px}
+.sc{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:18px;font-weight:700;font-size:14px;color:var(--mut)}
+.nb{border:0;width:34px;height:34px;border-radius:50%;background:#fff;color:#6a5083;font-size:20px;line-height:1;cursor:pointer;box-shadow:inset 0 0 0 1.2px var(--bb)}
+.nb:hover{background:#f6edfd}
+footer{text-align:center;margin-top:26px;color:#cbb3e6;font-size:15px;letter-spacing:.4em}
+@media (prefers-reduced-motion:reduce){.trk,html{scroll-behavior:auto}}
+@media print{body{background:#fff}.acts,.sc,#cp{display:none!important}.note,.sec{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>PRICELIST LUMIERE</h1>
+    <div class="orn"><i></i>&#10022;<i></i></div>
+    <p class="sub">lumière app prem — your trusted digital corner</p>
+    <nav class="acts" aria-label="Menu">
+      <a class="btn g" href="#order">Cara order</a>
+      <a class="btn g" href="#kontak">Kontak</a>
+      <a class="btn g" href="https://padlet.com/jeanneashlee21/Jean_store" target="_blank" rel="noopener">Lihat testimoni</a>
+      <button class="btn g" id="print" type="button">Cetak / simpan PDF</button>
+    </nav>
+  </header>
+
+  <main class="board" id="board"></main>
+
+  <section class="sec" id="order">
+    <h2>Cara order</h2>
+    <p>Salin format di bawah, isi, lalu kirim lewat DM.</p>
+    <pre class="fmt" id="fmt">🎀 FORMAT ORDER APP PREMIUM 🎀
+
+nama / @ :
+produk :
+durasi :
+tipe akun :
+email aktif :
+payment :
+catatan :
+
+☁️ rules :
+· isi format dengan lengkap & benar
+· payment first, lalu kirim bukti transfer
+· proses setelah pembayaran terkonfirmasi
+· garansi sesuai durasi, claim kirim bukti
+· jangan kasih kode OTP ke siapa pun kecuali diminta admin saat proses login</pre>
+    <button class="btn" id="cp" type="button">Salin format</button>
+  </section>
+
+  <section class="sec" id="kontak">
+    <h2>Contact order</h2>
+    <div class="wa">
+      <a href="https://wa.me/6287827349435" target="_blank" rel="noopener"><span>Jeje</span><small>WhatsApp</small></a>
+      <a href="https://wa.me/628561776799" target="_blank" rel="noopener"><span>Val</span><small>WhatsApp</small></a>
+      <a href="https://wa.me/62881012237026" target="_blank" rel="noopener"><span>Alleya</span><small>WhatsApp</small></a>
+      <a href="https://wa.me/6287896587312" target="_blank" rel="noopener"><span>Zaline</span><small>WhatsApp</small></a>
+    </div>
+    <p class="note2">Silakan kontak admin sesuai jam aktifnya ya, chat santai &amp; no spam ♡</p>
+    <hr class="cut">
+    <h2>&#2856;&#2855; Official acc</h2>
+    <div class="xs">
+      <a class="btn g" href="https://x.com/shipyanrd" target="_blank" rel="noopener">@shipyanrd</a>
+      <a class="btn g" href="https://x.com/monjts" target="_blank" rel="noopener">@monjts</a>
+      <a class="btn g" href="https://x.com/mooniereaz" target="_blank" rel="noopener">@mooniereaz</a>
+      <a class="btn g" href="https://x.com/valdernhxa" target="_blank" rel="noopener">@valdernhxa</a>
+    </div>
+    <div class="bye">Have a lovely day! ᰔᩚ</div>
+  </section>
+
+  <section class="sec" id="testi">
+    <h2>real talk from our buyers 🫶</h2>
+    <p>Testimoni asli dari pelanggan yang sudah order. Geser untuk membaca.</p>
+    <div class="sl" role="region" aria-roledescription="carousel" aria-label="Testimoni pelanggan">
+      <div class="trk" id="trk" tabindex="0"></div>
+    </div>
+    <div class="sc">
+      <button class="nb" id="pv" type="button" aria-label="Testimoni sebelumnya">&#8249;</button>
+      <span id="cnt" aria-live="polite">1 / 20</span>
+      <button class="nb" id="nx" type="button" aria-label="Testimoni berikutnya">&#8250;</button>
+    </div>
+    <a class="btn g" href="https://padlet.com/jeanneashlee21/Jean_store" target="_blank" rel="noopener">Lihat semua di Padlet</a>
+  </section>
+
+  <footer>&#10022; &#10022; &#10022;</footer>
+</div>
+
+<script>
+var NOTES=[
+{
+"c": "peach",
+"t": "CHATGPT PLUS",
+"b": "• 1 BULAN (Sharing 8 User)\n— Full BF + 2× Disable : 35k\n— Full BF + Full Disable : 45k\n• 1 BULAN (Sharing 5 User)\n— Full BF + 1× Disable : 40k\n— Full BF + Full Disable : 55k\n• 1 BULAN (Sharing 3 User)\n— Full BF + 1× Disable : 55k\n— Full BF + Full Disable : 65k"
+},
+{
+"c": "mint",
+"t": "CHATGPT HARIAN PLUS",
+"b": "\n• 1 Hari (5U) — Full garansi : 8k\n• 3 Hari (5U) — Full garansi : 15k\n• 7 Hari (8U) — Full garansi : 18k\n• 7 Hari (5U) — Full garansi : 22k"
+},
+{
+"c": "lilac",
+"t": "CHATGPT PRIVATE",
+"b": "PLUS 1 BULAN\n— No Garansi : 165k\n— Full BF + 2× Disable : 225k\n— Full BF + Full Disable : 275k\n\nBUSINESS INVITE 1 BULAN\n• Business Full Garansi : 155k"
+},
+{
+"c": "butter",
+"t": "CHATGPT GO",
+"b": "7 hari 5U — Full garansi : 10k\n1 Bulan 5U — Full garansi : 25k\n1 Bulan Private — Full BF + 2× Disable : 80k\n3 Bulan Private — Full BF + 2× Disable : 145k"
+},
+{
+"c": "rose",
+"t": "CLAUDE AI HARIAN",
+"b": "1 Hari (3 User) : 45k\n3 Hari (5 User) : 55k\n3 Hari (3 User) : 65k\n\n7 HARI SHARING\n5 User : 75k\n3 User : 85k"
+},
+{
+"c": "sky",
+"t": "CLAUDE AI BULANAN",
+"b": "1 bulan 5 User : 105k\n1 bulan 3 User : 145k"
+},
+{
+"c": "peach",
+"t": "CLAUDE AI PRIVATE",
+"b": "7 Hari Full Garansi : 175k\n1 bulan No Garansi : 285k\n1 bulan Full Garansi : 380k"
+},
+{
+"c": "lilac",
+"t": "GEMINI AI PRO",
+"b": "SISTEM INVITE EMAIL\n 1 Bulan : 10k\n 3 Bulan : 25k\n1 Tahun Garansi 60 Hari : 45k\n1 Tahun Garansi 350 Hari : 65k\n\n SISTEM LINK ACTIVATION\n 18 Bulan (Garansi 6 Bulan) : 55k"
+},
+{
+"c": "mint",
+"t": "MICROSOFT 365",
+"b": "SISTEM INVITE RENEWAL\n 1 Bulan : 7k\n 2 Bulan : 12k\n3 Bulan : 20k\n"
+},
+{
+"c": "sky",
+"t": "WPS PRO",
+"b": "SHARING ACCOUNT\n1 Bulan : 14k\n2 Bulan : 20k\n1 Tahun (Garansi 8 Bulan) : 25k\n"
+},
+{
+"c": "rose",
+"t": "JENNI AI",
+"b": "\nSHARING ACCOUNT (8 USER)\n1 Bulan : 26k\n3 Bulan : 45k\n6 Bulan : 65k"
+},
+{
+"c": "butter",
+"t": "BOOKS & AUDIOBOOKS",
+"b": "KINDLE UNLIMITED\n1 Bulan (Sharing 8U) : 30k\n3 Bulan (Sharing 8U) : 55k\n1 Bulan (Private) : 95k\n\nAUDIBLE\n1 Bulan Sharing (Audible Only) : 35k\n1 Bulan Private (Premium Plus) : 110k"
+},
+{
+"c": "peach",
+"t": "STUDY & AI TOOLS",
+"b": "QUIZLET PLUS\n1 Bulan (Sharing 8U) : 25k\n3 Bulan (Sharing 8U) : 45k\n1 Bulan (Private) : 55k\n3 Bulan (Private) : 95k\n\nMINDGRASP AI\n3 Hari (Private) : 20k"
+},
+{
+"c": "lilac",
+"t": "MUSIC STREAMING",
+"b": "AMAZON MUSIC PREMIUM\n1 Bulan Private : 38k\n\nTIDAL HIFI PLUS\n1 Bulan Private : 55k\n3 Bulan Private : 120k"
+},
+{
+"c": "mint",
+"t": "OTHER EDUCATION",
+"b": "PERPLEXITY PRO\n 1 Bulan (8 User) : 35k\n\n SCITE AI\n7 hari private : 27k\n\nHUMATA EXPERT\n1 Bulan (Sharing 8 User) : 20k\n1 Bulan (Sharing 5 User) : 35k\n1 Bulan (Private) : 60k\n\nDEEPL\n1 Bulan Sharing : 28k\n3 Hari Private : 15k\n14 Hari Private : 30k\n\nNOTETAKING APPS (LIFETIME)\nKilonotes (Android — Shared) : 25k\nGoodnotes (iOS — Shared) : 25k\n\n\n\n─── ⋆⋅☆⋅⋆ ───\n🪧 NOTES:\n• Lifetime garansi 8 bulan\n• Pastikan device & tipe sistem akun sesuai sebelum checkout. 🤍"
+},
+{
+"c": "sky",
+"t": "EDITING APPS",
+"b": "BEAUTYPLUS IOS\n1 Tahun Sharing (Garansi 8 Bulan) : 25k\n\nDAZZCAM IOS\nLifetime Sharing (Garansi 8 Bulan) : 22k\n\nUNFOLD IOS & ANDROID\n1 Tahun Sharing (Garansi 8 Bulan) : 28k\n\nVSCO IOS & ANDRO\n1 Tahun Sharing (Garansi 8 Bulan) : 20k\n\nOLDROLL ANDROID\n1 Tahun Sharing (Garansi 8 Bulan) : 20k\n\nPICSART PRO\n7 Hari (Private) : 15k\n1 Bulan (Sharing) : 12k\n2 Bulan (Sharing) : 18k\n\nPROCREATE\nPocket iOS Lifetime : 28k\nDream Lifetime : 30k\niPad Lifetime : 25k\n\nPROCCD\nLifetime Android : 25k\n\nIBIS PAINT\n1 Tahun iOS : 20k\n\n─── ⋆⋅☆⋅⋆ ───\n🪧 NOTES:\n• Pastikan OS device buyer (iOS/Android) sudah sesuai sebelum order. 🤍"
+},
+{
+"c": "rose",
+"t": "VPN",
+"b": "SURFSHARK\n2 Bulan Private : 45k\n\nEXPRESS\n1 Bulan Sharing : 15k\n\nHMA\n1 Bulan Sharing : 18k\n\nNORD\n3 Bulan Sharing : 26k"
+}
+];
+function $(s){return document.querySelector(s)}
+function esc(t){var d=document.createElement('div');d.textContent=t==null?'':t;return d.innerHTML}
+function parse(l){
+  var m=l.match(/^(.*?)[\s\-\u2013\u2014:.\u00b7]*(?:rp\.?\s*)?(\d[\d.,]*)\s*(k|rb|ribu|jt|juta)?\s*$/i);
+  if(!m||!m[1].trim())return{n:l};
+  var v=Number(m[2].replace(/[.,]/g,'')),s=(m[3]||'').toLowerCase();
+  if(s==='k'||s==='rb'||s==='ribu')v*=1000;else if(s==='jt'||s==='juta')v*=1000000;
+  if(!s&&v<100)return{n:l};
+  return{n:m[1].trim(),p:v};
+}
+function view(b){
+  return b.split('\n').map(function(x){return x.trim()}).filter(Boolean).map(function(l){var r=parse(l);
+    return r.p!=null?'<div class="ln"><span class="nm">'+esc(r.n)+'</span><span class="dots"></span><span class="pr">Rp '+r.p.toLocaleString('id-ID')+'</span></div>'
+    :'<div class="ln tx">'+esc(r.n)+'</div>';}).join('');
+}
+$('#board').innerHTML=NOTES.map(function(n){return '<article class="note" data-c="'+n.c+'"><h2>'+esc(n.t)+'</h2>'+view(n.b)+'</article>'}).join('');
+
+var TS=[
+['Adobe Creative Cloud','murah & kualitasnya juga baguss maacii kaakk \uD83D\uDE0D\uD83E\uDD70'],
+['ChatGPT','prosesnya fasttt bangettt, pelayanannya ramah poll'],
+['From Ress GPT','kaaa jean baikkk bgt, senang as ress aku ketemu fh gpt sebaik kaa jean yang sangat komunikatif yess. longtext nya juga mantep bgt aku jadi semangat juga ordernya xixixix. sehat slalu kaa jeannn'],
+['ChatGPT','kakanya baikk bangeett, longtextt, ramah sekalii wowww, fastresp n fast proses jgg manteep. thankyouu kakakk sehat selaluu \uD83D\uDC9D\uD83C\uDF39'],
+['Repeat order','AKHHH ADMINNYA RAMAH BGTT \uD83D\uDE2D\uD83D\uDE2D\uD83D\uDE2D ak ngerepotin krna berkali kali send kode TP KAK JEJE MASIH SE RAMAH ITUU??? akakjskaksja REPEAT ORDER REPEAT ORDER \uD83C\uDF40\uD83C\uDF40'],
+['Pelanggan GPT','Suka banget order disini buat gptnya fast, adminnya ramah \uD83D\uDE3B fast otp juga, pokoknya top deh \u261D\uFE0F neks taim mau repeat order lagi dan lagi dan lagiiiy \u2728'],
+['Pelanggan','Adminnya sangat fast respon, ramah dan prosesnya sangat amat cepat love ittt'],
+['Pelanggan GPT','beli gpt disini adminnya ramah dan otp sangat sangat fast no drama. pokoknya okeeeee mantapp'],
+['ChatGPT','pelayanan nya satset poll, ramaahh, otp alhamdulillah lancar, after sales nya juga baguss. terima kasih ya ka bakal repeat order \uD83D\uDC98'],
+['ChatGPT','kakakkkk ramah bangetttt \uD83E\uDD7A fsr jugaaa+++ malaahhh, terus c blm payment kknya malah udh send akunnya duluan \uD83E\uDD7A\uD83C\uDF80\uD83D\uDC95'],
+['ChatGPT Go','mantaapp banget pelayanannyaa, fast responn poll, ownernyaa baikk super duper ramaah jugaa!! abis order di kakaknyaa langsung didoain yang baik baik huhuww terharuu \uD83D\uDE2D\uD83D\uDC9C'],
+['GPT+ 8u 1 bulan','mangtaff banget akaknya gercep bangett, otpan lancar jugaa. dipertahankan yaa kakk, semoga bisa langganan \uD83E\uDD29\uD83D\uDC96'],
+['Adobe','huhu sellernya baikkk bgtt, udh masuk di daftar list seller yg aku bakal order disini lagi :333 \u2B50'],
+['Adobe CC','trusteddd guyss aman bgt pokoknyaa thankiess kak jejee lancar terus orderannyaa :D'],
+['WPS Private','terimakaasii kaak, fast prosess & trusted abiess. akuu mau repeat order lagiii inii, sukses selaluu yaaa'],
+['Grammarly','selalu langganan di sini udah sejak 2 tahun lalu? aku selalu balik ke dia krn udah trusted+fastresp'],
+['Beauty+','kak je ini seller pembaik dan penyelamat dikala fh lain kosong belio malah ada dan fastrespon sekali plus plus ramah maksimal'],
+['Byutiplus','bener2 inilah yg sy cari2 \uD83E\uDDD0 fastt & tanggap esp sama apps yg emg need otp/ verif.... LOP SEKEBONN KAK JEJE \uD83D\uDE3D'],
+['Claude','walau otp delay kakak ini ttp gercep, makasi kakak, selalu amanah yahh'],
+['GPT+ 1 hari','terimakasii kakaak, kakak fsr banget dan sangat komunikatif! ramah jugaaak <333 sukses selalu ia kaak \uD83D\uDC96'],
+['CGPT+ 7 hari','sumpa awalnya ak ketar ketir butuh cgpt+ buat c karena fh sebagian off dan sebagian gak ridi, akhirnya dpt nomor kaka ini darik kenalan aku dan alhamdulillahnya dia ridi, pls TERIMAKASIH BANGET KAAAAK PAHALA PADAMU LOVEU 🤞'],
+['Gpt plus 1b','first takee ke kak jeje, fastresp bangett alhamdulillah bismillah konsisten yaaa'],
+['Gpt 1b','otp satset, komunikasi juga oke'],
+['Gpt plus 1b','Fast respon, fast OTP, kakanya juga ramah poll, ⭐⭐⭐⭐⭐'],
+['Grok AI 7d','first time, gercep sat set hihi, semoga langganan dan selalu amanah, thank youuu'],
+['Pelanggan','first time take disiniii, kakaknya fast respon sekaliii dan ramah. pas otp jg ga ngilang atau slow respon. bestt!!!! tinggal berharap semoga jipitinya tidak berulah yah ampe durasi abis 😭☝️'],
+['ChatGPT lagii plus','lagi lagi lagiii bewli disinii sama kak jeje yg baiqq dan gercepppppp 🥰🥰🥰🥰🥰 semangat terus kakk, disisni trusteddd guyssss jajankk disini pokoknyaaa 😘✌️'],
+['ChatGPT & Goodnotes','TOPPP SELLERR SIII, FASTTTT RESPONNN PAKE BNGTTTT!! CINTAA KAKANYAAA LOFYUUU BLUBBB 💗💗💗'],
+['ChatGPT 1b','Sangat sangat fast respon dan ramah bintang 100 ✨✨✨✨ no delay delay waktu otp mantapss 😏🤞'],
+['ChatGPT plus','kakak nya fast respon bgtt dan ramahh sekalii 🤞 makasi banyak kak🫶'],
+['Pelanggan','seller jipiti yang selalu gercepp dan fast respon sekaliiii😭🫶 terima kasih banyak yaa kak 🤞'],
+['ChatGPT pluss','proses satset, garansi udah pastii sesuaiii dan fullll 🤞😻 sabar juga kakaknya nungguin dan bantu proses login dan otpnya. sehat selalu dan lancar rezekinya akakkk 😘🥰'],
+['ChatGPT','first time beli disini. pelayanannya ramah, fast respon, sabar. ttp jadi seller yang baik ya kak'],
+['ChatGPT plus','proses otpnya gercep banget meskipun kadang ada salah kode karna cust ku kelamaan masukin otpnya tapi kakaknya sabar bgtt✨ thank youu kak'],
+['Canva 1 thn','Ka Jean the best, udah lama langganan sama ka Jean, kalau ada yang butuh canva, vsco, lightroom, apapun itu bisa reach out ke kak Jean pasti akan dibantu dicariin. Pertanyaan apapun dijawab dengan sepenuh hati dan jika ada kendala, pasti ka Jean akan bantu, jadi ga usah takut untuk belii. Makasi ka!!!'],
+['Adobe CC','sangat fast respond, dan informatif bgt sellernya jd pas login langsung sat set aja hehehe sgt trusted makasih ya kak maaf agak bawel uhuhu 😢 tp ttp trusted gesss smoga sukses terus ya kak^^'],
+['VPN','sellernya ramah BGTT, fastresp bgt, baik bgt bgt bgt!! deviceku sempet ada error tapi kakanya gercep and sabar bgt mau bantuin huhu makasih banyak kak!! bakal reorder disini lg🫶🫶🫶'],
+['Ka Jeje FH jipitiii','AAA FH YANG FAST RESPON, SELALUU GERCEPP BIKIN CUST AKUUU SENENGG SAMA PELAYANANNKUUU PADAHAL ITU BERKATT KA JEJE JUGAA 😭😭✌️✌️✌️'],
+['ChatGPT','thanks ya akak prosesnya satset parah 💗💗'],
+['Gpt 7d','Kakaknyaa gercepp, ramah polllll, jangan ragu beli di siniii yaaa']
+];
+var PAL=[['#ffe9e1','#ffbfa9','#7a4a3d'],['#f0e6fa','#d3b9f0','#5b4780'],['#e2f6ea','#b0e2c8','#3f6b57'],['#e2effb','#b3d5f3','#3f5f86'],['#fde6ee','#f6bcd1','#86465f'],['#fff5d3','#f6dd8c','#7a6120']];
+var trk=$('#trk');
+trk.innerHTML=TS.map(function(t,i){var p=PAL[i%PAL.length];
+  return '<article class="tc" style="--n:'+p[0]+';--a:'+p[1]+';--i:'+p[2]+'"><div class="st" aria-label="Bintang 5">\u2605\u2605\u2605\u2605\u2605</div><p>'+esc(t[1])+'</p><span class="by">'+esc(t[0])+'</span></article>';
+}).join('');
+var cards=trk.children;
+$('#cnt').textContent='1 / '+cards.length;
+function step(){return cards[0]?cards[0].offsetWidth+16:300}
+function upd(){
+  var mid=trk.scrollLeft+trk.clientWidth/2,best=0,bd=1e9;
+  for(var i=0;i<cards.length;i++){var d=Math.abs(cards[i].offsetLeft+cards[i].offsetWidth/2-mid);if(d<bd){bd=d;best=i}}
+  $('#cnt').textContent=(best+1)+' / '+cards.length;
+}
+function go(dir){
+  var end=trk.scrollLeft+trk.clientWidth>=trk.scrollWidth-4;
+  if(dir>0&&end)trk.scrollTo({left:0});else if(dir<0&&trk.scrollLeft<4)trk.scrollTo({left:trk.scrollWidth});else trk.scrollBy({left:dir*step()});
+}
+var tick=null;trk.addEventListener('scroll',function(){if(tick)return;tick=requestAnimationFrame(function(){tick=null;upd()})});
+$('#pv').addEventListener('click',function(){go(-1)});
+$('#nx').addEventListener('click',function(){go(1)});
+var auto=null,rm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function play(){if(rm||auto)return;auto=setInterval(function(){go(1)},5000)}
+function stop(){clearInterval(auto);auto=null}
+var T=$('#testi');
+['pointerenter','focusin','touchstart'].forEach(function(ev){T.addEventListener(ev,stop,{passive:true})});
+['pointerleave','focusout'].forEach(function(ev){T.addEventListener(ev,play)});
+upd();play();
+$('#print').addEventListener('click',function(){window.print()});
+
+function legacyCopy(t){
+  var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';
+  document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}
+  document.body.removeChild(a);return ok;
+}
+$('#cp').addEventListener('click',function(){
+  var b=this,t=$('#fmt').textContent;
+  function done(ok){b.textContent=ok?'Tersalin \u2713':'Tekan lama teks untuk menyalin';setTimeout(function(){b.textContent='Salin format'},2200)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(function(){done(true)},function(){done(legacyCopy(t))});
+  }else done(legacyCopy(t));
+});
+</script>
+</body>
+</html>
